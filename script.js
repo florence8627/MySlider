@@ -8,4 +8,10 @@
         handle.text( ui.value );
       }
     });
+
+    $( "button" ).click( function( event ) {
+      TogetherJS(this); 
+      return false;
+    } );
+
   } );
