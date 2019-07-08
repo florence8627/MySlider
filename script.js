@@ -20,10 +20,12 @@
 
 TogetherJSConfig_on_ready = function () {
   MyApp.on("sliderChange", fireTogetherJSVisibility);
+
 };
 TogetherJSConfig_on_close = function () {
   MyApp.off("sliderChange", fireTogetherJSVisibility);
 };
+
 
 
   } );
@@ -49,15 +51,14 @@ TogetherJS.hub.on("sliderChange", function (msg) {
   var element = elementFinder.findElement(msg.element);
   sliderChangeFromRemote = true;
   try{
-   MyApp.updateSlider(element, msg.value);
+   
+	    $('#custom-handle').slider('value', msg.value);
+
+
    }
   finally{
   	sliderChangeFromRemote = false;
   }
 });
 
-MyApp.updateSlider = function(el, value){
 
-	    $('#custom-handle').slider('value', value);
-
-}
