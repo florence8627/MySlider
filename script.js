@@ -6,33 +6,31 @@
       },
       slide: function( event, ui ) {
         handle.text( ui.value );
+        fireSliderChange($(this), ui.value);
       }
     });
 
-    handle.on("sliderChange", function (){
-      MyApp.emit("sliderChange", this, $(this).slider("value"));
-    });
 
     $( "button" ).click( function( event ) {
       TogetherJS(this); 
       return false;
     });
 
-TogetherJSConfig_on_ready = function () {
-  MyApp.on("sliderChange", fireTogetherJSVisibility);
-
-};
-TogetherJSConfig_on_close = function () {
-  MyApp.off("sliderChange", fireTogetherJSVisibility);
-};
 
 
 
   } );
 
+//togetherjs config //
+window.TogetherJSConfig = {
+	cloneClicks: "#custom-handle",
+	suppressJoinConfirmation: true
+};
+
 var sliderChangeFromRemote = false;
 
-function fireTogetherJSVisibility(element, value) {
+
+function fireSliderChange(element, value) {
   if(sliderChangeFromRemote){
   	return;
   }
@@ -41,6 +39,11 @@ function fireTogetherJSVisibility(element, value) {
   TogetherJS.send({type: "sliderChange", value: value, element: location});
 }
 
+function updateSlider(element,value){
+
+	  $('#custom-handle').slider('value', value);
+
+}
 
 TogetherJS.hub.on("sliderChange", function (msg) {
   if(!msg.sameUrl){
@@ -52,8 +55,7 @@ TogetherJS.hub.on("sliderChange", function (msg) {
   sliderChangeFromRemote = true;
   try{
    
-	    $('#custom-handle').slider('value', msg.value);
-
+	  updateSlider(element, msg.value);
 
    }
   finally{
