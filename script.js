@@ -1,5 +1,6 @@
   $( function() {
     var handle = $( "#custom-handle" );
+
     $( "#slider" ).slider({
       create: function() {
         handle.text( $( this ).slider( "value" ) );
@@ -8,6 +9,7 @@
         handle.text( ui.value );
         fireSliderChange($(this), ui.value);
       }
+    
     });
 
 
@@ -19,7 +21,7 @@
 
 
 
-  } );
+  });
 
 //togetherjs config //
 window.TogetherJSConfig = {
@@ -29,7 +31,7 @@ window.TogetherJSConfig = {
 
 var sliderChangeFromRemote = false;
 
-
+//fire custom togetherjs event
 function fireSliderChange(element, value) {
   if(sliderChangeFromRemote){
   	return;
@@ -38,13 +40,7 @@ function fireSliderChange(element, value) {
   var location = elementFinder.elementLocation(element);
   TogetherJS.send({type: "sliderChange", value: value, element: location});
 }
-
-function updateSlider(element,value){
-
-	  $('#custom-handle').slider('value', value);
-
-}
-
+//listen to togetherjs event
 TogetherJS.hub.on("sliderChange", function (msg) {
   if(!msg.sameUrl){
   	return;
@@ -64,3 +60,11 @@ TogetherJS.hub.on("sliderChange", function (msg) {
 });
 
 
+function updateSlider(element,value){
+
+	  console.log(element);
+
+	  $("#slider").slider("value", value);
+	  $("#custom-handle").text($("#slider").slider("value"))
+
+}
