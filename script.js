@@ -58,7 +58,6 @@ function fireSliderChange(element, value) {
   }
   var elementFinder = TogetherJS.require("elementFinder");
   var location = elementFinder.elementLocation(element);
-  console.log(elementFinder);
   TogetherJS.send({type: "sliderChange", value: value, element: location});
 }
 
@@ -88,9 +87,10 @@ TogetherJS.hub.on("sliderChange", function (msg) {
 
 function updateSlider(element,value){
 
-	  console.log($(element));
+	  // console.log($(element));
 
-	  $("#slider").slider("value", value);
-	  $("#custom-handle").text($("#slider").slider("value"))
+	  $(element).slider("value", value);
+	  handle = $(element).children()[0];
+	  handle.text($(element).slider("value"));
 
 }
