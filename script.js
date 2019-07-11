@@ -91,6 +91,7 @@ function updateSlider(element,value){
 
 	  $(element).slider("value", value);
 	  handle = $(element).children()[0];
+	  console.log(handle);
 	  handle.text(value);
 
 }
