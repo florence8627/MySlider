@@ -90,8 +90,8 @@ function updateSlider(element,value){
 	  // console.log($(element));
 
 	  $(element).slider("value", value);
-	  handle = element.substr(0,5) + "handle";
-	  console.log(handle);
+	  console.log(element)
+	  handle = "#"+ $(element).attr("id").substr(0,4) + "handle";
 	  $(handle).text($(element).slider("value"));
 
 }
