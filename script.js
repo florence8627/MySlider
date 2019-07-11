@@ -1,19 +1,39 @@
   $( function() {
-    var handle = $( "#custom-handle" );
+    var azi_handle = $( "#azi_handle" );
 
-    $( "#slider" ).slider({
+    $( "#azi_slider" ).slider({
       create: function() {
-        handle.text( $( this ).slider( "value" ) );
+        azi_handle.text( $( this ).slider( "value" ) );
       },
       slide: function( event, ui ) {
-        handle.text( ui.value );
+        azi_handle.text( ui.value );
         fireSliderChange($(this), ui.value);
       }
     
     });
+   $("#azi_slider").slider("option","min", 0);
+   $("#azi_slider").slider("option", "max", 360 );
+
+    var ele_handle = $( "#ele_handle" );
+
+    $( "#ele_slider" ).slider({
+      create: function() {
+        ele_handle.text( $( this ).slider( "value" ) );
+      },
+      slide: function( event, ui ) {
+        ele_handle.text( ui.value );
+        fireSliderChange($(this), ui.value);
+      }
+    
+    });
+   $("#ele_slider").slider("option","min", 0);
+   $("#ele_slider").slider("option", "max", 90 );
 
 
-    $( "button" ).click( function( event ) {
+
+
+
+   $( "button" ).click( function( event ) {
       TogetherJS(this); 
       return false;
     });
@@ -25,7 +45,7 @@
 
 //togetherjs config //
 window.TogetherJSConfig = {
-	cloneClicks: "#custom-handle",
+	
 	suppressJoinConfirmation: true
 };
 
@@ -38,8 +58,12 @@ function fireSliderChange(element, value) {
   }
   var elementFinder = TogetherJS.require("elementFinder");
   var location = elementFinder.elementLocation(element);
+  console.log(elementFinder);
   TogetherJS.send({type: "sliderChange", value: value, element: location});
 }
+
+
+
 //listen to togetherjs event
 TogetherJS.hub.on("sliderChange", function (msg) {
   if(!msg.sameUrl){
@@ -51,8 +75,9 @@ TogetherJS.hub.on("sliderChange", function (msg) {
   sliderChangeFromRemote = true;
   try{
    
-	  updateSlider(element, msg.value);
-
+     
+	   updateSlider(element, msg.value);
+	 
    }
   finally{
   	sliderChangeFromRemote = false;
@@ -60,9 +85,10 @@ TogetherJS.hub.on("sliderChange", function (msg) {
 });
 
 
+
 function updateSlider(element,value){
 
-	  console.log(element);
+	  console.log($(element));
 
 	  $("#slider").slider("value", value);
 	  $("#custom-handle").text($("#slider").slider("value"))
