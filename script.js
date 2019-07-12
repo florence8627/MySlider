@@ -26,7 +26,7 @@
       }
     
     });
-   $("#ele_slider").slider("option","min", 0);
+   $("#ele_slider").slider("option","min", -90);
    $("#ele_slider").slider("option", "max", 90 );
 
 
