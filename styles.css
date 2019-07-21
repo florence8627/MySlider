@@ -7,11 +7,11 @@ div{
 
 button{
   width:150px;
-  height:50px;
+  height:40px;
 }
 
 #azi_slider, #ele_slider{
- margin-top: 40px;
+ margin-top: 20px;
  margin-left:40px;
  margin-right:40px;
 }
