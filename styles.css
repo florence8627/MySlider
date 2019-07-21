@@ -11,17 +11,17 @@ button{
 }
 
 #azi_slider, #ele_slider{
- margin-top: 20px;
+ margin-top: 10px;
  margin-left:40px;
  margin-right:40px;
 }
 
 #azi_handle, #ele_handle {
     width: 3em;
-    height: 1.6em;
+    height: 1.5em;
     top: 50%;
     margin-top: -.8em;
     text-align: center;
     line-height: 1.6em;
-   
+
   }
