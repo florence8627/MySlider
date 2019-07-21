@@ -29,7 +29,7 @@
    $("#ele_slider").slider("option","min", -90);
    $("#ele_slider").slider("option", "max", 90 );
 
-   // $('.ui-slider-handle').draggable();
+
 
 
 
